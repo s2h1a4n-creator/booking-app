@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>預約排課系統</title>
+</head>
+<body>
+    <h1>課程清單</h1>
+
+    <ul>
+        {% for c in classes %}
+            <li>
+                {{ c.name }} - {{ c.coach }} - 時間：{{ c.time }}
+                <form action="/book" method="POST" style="margin-top: 4px; margin-bottom: 12px;">
+                    <input type="hidden" name="class_id" value="{{ c.id }}">
+
+                    <div>
+                        <label>
+                            你的名字：
+                            <input type="text" name="name" required>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            上課日期：
+                            <!-- today 是後端傳來的今天日期，可當預設值 -->
+                            <input type="date" name="date" value="{{ today }}" required>
+                        </label>
+                    </div>
+
+                    <button type="submit">預約這堂課</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    </body>
+</html>
